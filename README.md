@@ -30,7 +30,7 @@ To add this user secret on your local environment, navigate to the `BizStream.Mi
 
 ![image](https://github.com/BizStream/altafiber-web/assets/105802092/a12ba903-8626-42b4-80f9-35b0558632f7)
 
-A file named `secrets.json` should open, and there you will add/update the connection string value. For a simple copy-paste snippet of the whole contents of this file, navigate to this [1Pass link](https://start.1password.com/open/i?a=JIKORK33ZNEDFLOSOGRSQUVECI&v=7f73g2ssu67sgkvpye3aumu3cy&i=ybdlmqwo6dp7sxcos6lpjz6jwe&h=bizstream.1password.com).
+A file named `secrets.json` should open, and there you will add/update the connection string value. If you're a BizStream employee, you will likely find connection strings in 1Pass.
 
 ## Running a Migration
 To run the migration (after setup steps are complete), simply open `BizStream.Migrations.sln` and run! A command terminal should show up with a multi-selector of migration options from `Options/MigrationOptions.cs`.
@@ -39,13 +39,14 @@ To run the migration (after setup steps are complete), simply open `BizStream.Mi
 Here are the steps to take for adding a new migration:
 
 1. Make sure the page type, custom table item, etc. code generated from Kentico is in the solution (most likely in the Class Library mentioned below).
-2. Add a Model in the `Models` directory with property types and names that match the fields from the source table. The model should implement either the `CustomTableItemModel` or `TreeNodeModel` base type depending on what is being migrated.
-3. Add a repository in the `Repositories` directory that implements either the `SqlToTreeNodeRepository` or `SqlToCustomTableItemRepository` interface, depending on what is being migrated.
-4. Override the `SqlQuery` string property in the new repository that pulls the desired data from the old (source) Kentico database.
-5. Add a mapping profile (or add to an existing one) under the `Mappings` directory that maps the fields from the model's (source) type to the Kentico (destination) type.
-6. Add a const string name for the migration into `MigrationOptions.cs` file. This will be used in the CLI list for selecting which migration to run.
-7. Add a migrator class that implements the `IMigrator` interface and has the `[Migrator(<name>)]` attribute where `<name>` is a reference to the constant string added in the last step.
-8. Add the new repository as a dependency in the constructor in the new migrator class and implement the `Migrate` method. The migrate method should implement code to `Retrieve` the data and `Insert` the data into the new database (follow existing examples).
+2. Create a SQL query against the old Kentico 12 site that retrieves the necessary data for insertion into Kentico 13. Note: for `TreeNode`s, you will need to include `NodeName`, `NodeAlias`, `NodeAliasPath`, and `ParentNodeAliasPath` as columns in this query to match up with base Dapper models in the project.
+4. Add a Model in the `Models` directory with property types and names that exactly match the fields pulled from the SQL query. The model should implement either the `CustomTableItemModel`, `TreeNodeModel`, or another base type depending on what is being migrated.
+5. Add a repository in the `Repositories` directory that implements either the `SqlToTreeNodeRepository` or `SqlToCustomTableItemRepository` interface, depending on what is being migrated.
+6. Override the `SqlQuery` string property in the new repository that pulls the desired data from the old (source) Kentico database.
+7. Add a mapping profile (or add to an existing one) under the `Mappings` directory that maps the fields from the model's (source) type to the Kentico (destination) type.
+8. Add a const string name for the migration into `MigrationOptions.cs` file. This will be used in the CLI list for selecting which migration to run.
+9. Add a migrator class that implements the `IMigrator` interface and has the `[Migrator(<name>)]` attribute where `<name>` is a reference to the constant string added in the last step.
+10. Add the new repository as a dependency in the constructor in the new migrator class and implement the `Migrate` method. The migrate method should implement code to `Retrieve` the data and `Insert` the data into the new database (follow existing examples).
 
 ## Recommendations
 For Kentico-specific implementations, leveraging existing C# Class Libraries in your project that contain generated PageType models is recommended. Simply add such class libraries as a project reference to your Migration project and use them at your leisure (likely will be a class library named `<project>.Infrastructure.Kentico`)
