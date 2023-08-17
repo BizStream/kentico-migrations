@@ -30,7 +30,7 @@ To add this user secret on your local environment, navigate to the `BizStream.Mi
 
 ![image](https://github.com/BizStream/altafiber-web/assets/105802092/a12ba903-8626-42b4-80f9-35b0558632f7)
 
-A file named `secrets.json` should open, and there you will add/update the connection string value. For a simple copy-paste snippet of the whole contents of this file, navigate to this [1Pass link](https://start.1password.com/open/i?a=JIKORK33ZNEDFLOSOGRSQUVECI&v=7f73g2ssu67sgkvpye3aumu3cy&i=ybdlmqwo6dp7sxcos6lpjz6jwe&h=bizstream.1password.com).
+A file named `secrets.json` should open, and there you will add/update the connection string value. If you're a BizStream employee, you will likely find connection strings in 1Pass.
 
 ## Running a Migration
 To run the migration (after setup steps are complete), simply open `BizStream.Migrations.sln` and run! A command terminal should show up with a multi-selector of migration options from `Options/MigrationOptions.cs`.
