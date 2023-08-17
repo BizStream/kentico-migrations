@@ -10,7 +10,7 @@ The main idea behind this project comes from source & destination endpoints (e.g
 Assuming you have a Kentico 13 web project that you are adding this to, open `WebApp.sln` and rebuild `CMSApp.csproj` to ensure that all pages types are up-to-date in the admin (this is most important for Kentico 13 projects with Continuous Integration enabled).
 
 ### Connection Strings
-If connection strings are required for both source and destination, the Destination connection string (for the new site) will be placed in the `BizStream.Migrations/connectionStrings.config` file. See `docs/connectionStrings.config` for a templated version of this file that simply requires copy-and-pasting the actual connection string in question:
+If connection strings are required for both source and destination, the Destination connection string (for the new site) will be placed in the `BizStream.Migrations/connectionStrings.config` file, which should look like this:
 
 ```
 <connectionStrings>
