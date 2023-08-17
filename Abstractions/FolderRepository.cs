@@ -12,11 +12,4 @@ public abstract class FolderRepository : SqlToTreeNodeRepository<FolderModel, Fo
         : base( exportOptions, mapper )
     {
     }
-
-    public void Insert( FolderModel model )
-    {
-        var node = TreeNode.New<Folder>();
-
-        base.Insert( model, node );
-    }
 }

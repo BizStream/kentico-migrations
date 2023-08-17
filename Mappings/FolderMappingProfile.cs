@@ -8,8 +8,6 @@ public class FolderMappingProfile : Profile
     public FolderMappingProfile()
     {
         CreateMap<FolderModel, Folder>()
-            .ForMember( dest => dest.NodeName, opt => opt.MapFrom( model => model.Name ) )
-            .ForMember( dest => dest.DocumentName, opt => opt.MapFrom( model => model.Name ) );
-
+            .ForMember( dest => dest.DocumentName, opt => opt.MapFrom( model => model.NodeName ) );
     }
 }

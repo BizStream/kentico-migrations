@@ -11,7 +11,7 @@ public class SettingsKeyRepository : SqlRepository<SettingsKeyModel>, ISettingsK
 {
     private readonly IMapper mapper;
 
-    public override string SqlQuery { get; } = @"SELECT DISTINCT 
+    protected override string SqlQuery => @"SELECT DISTINCT 
 	                                                 sk.KeyName
 	                                                ,sk.KeyDisplayName
 	                                                ,sk.KeyValue

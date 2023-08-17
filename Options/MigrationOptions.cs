@@ -3,6 +3,7 @@ public static class MigrationOptions
 {
     public const string ResourceStrings = "Resource Strings";
     public const string Settings = "Settings";
+    public const string Articles = "Articles";
 
     public static IEnumerable<string> All
         => typeof( MigrationOptions )

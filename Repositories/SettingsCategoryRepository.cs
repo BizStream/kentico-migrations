@@ -11,7 +11,7 @@ public class SettingsCategoryRepository : SqlRepository<SettingsCategoryModel>, 
 {
     private readonly IMapper mapper;
 
-    public override string SqlQuery { get; } = @"SELECT DISTINCT 
+    protected override string SqlQuery => @"SELECT DISTINCT 
 	                                                 sc.CategoryName
 	                                                ,CategoryDisplayName
 	                                                ,CategoryIsGroup

@@ -15,7 +15,7 @@ public class ResourceStringRepository : SqlRepository<ResourceStringModel>, IRes
 {
     private readonly IMapper mapper;
 
-    public override string SqlQuery { get; } = @"
+    protected override string SqlQuery => @"
                                                 SELECT
                                                      rs.StringKey
 	                                                ,rs.StringIsCustom

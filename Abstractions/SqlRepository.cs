@@ -14,7 +14,7 @@ namespace BizStream.Migrations.Abstractions;
 public abstract class SqlRepository<TEntity> : IReadOnlyRepository<TEntity>, ISqlRepository
     where TEntity : class
 {
-    public virtual string SqlQuery { get; } = string.Empty;
+    protected virtual string SqlQuery { get; set; }
 
     private readonly IOptions<ExportOptions> exportOptions;
 
