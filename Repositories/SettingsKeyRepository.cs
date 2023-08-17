@@ -12,21 +12,17 @@ public class SettingsKeyRepository : SqlRepository<SettingsKeyModel>, ISettingsK
     private readonly IMapper mapper;
 
     public override string SqlQuery { get; } = @"SELECT DISTINCT 
-	                                                 REPLACE(sk.KeyName, 'CinBell', 'altafiber') as 'KeyName'
+	                                                 sk.KeyName
 	                                                ,sk.KeyDisplayName
 	                                                ,sk.KeyValue
                                                     ,sk.KeyType
                                                     ,sk.KeyDescription
                                                     ,sk.KeyExplanationText
-	                                                ,REPLACE(
-		                                                REPLACE(
-			                                                REPLACE(sc.CategoryName, 'CustomWebPaths', 'PathSettings'), 
-		                                                'Group', ''), 
-	                                                'CinBell.CustomSettings.GeneralSettings', 'altafiberSettings' ) as 'CategoryName'
+	                                                ,sc.CategoryName
                                                 FROM CMS_SettingsCategory sc
                                                 INNER JOIN CMS_SettingsKey sk
                                                 ON sk.KeyCategoryID = sc.CategoryID
-                                                WHERE CategoryName LIKE 'CinBell%'";
+                                                WHERE CategoryName LIKE 'custom%'";
 
     public SettingsKeyRepository(
         IOptions<ExportOptions> exportOptions,

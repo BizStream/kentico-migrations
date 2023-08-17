@@ -1,11 +1,13 @@
-﻿using System.Runtime.CompilerServices;
+﻿using AutoMapper;
+
 using BizStream.Migrations.Abstractions;
 using BizStream.Migrations.Models;
 using BizStream.Migrations.Options;
-using AutoMapper;
-using CMS.Helpers;
+
 using CMS.Localization;
+
 using Microsoft.Extensions.Options;
+
 using Spectre.Console;
 
 namespace BizStream.Migrations.Repositories;
@@ -15,7 +17,7 @@ public class ResourceStringRepository : SqlRepository<ResourceStringModel>, IRes
 
     public override string SqlQuery { get; } = @"
                                                 SELECT
-                                                    REPLACE(rs.StringKey, 'CinBell', 'altafiber') as 'StringKey'
+                                                     rs.StringKey
 	                                                ,rs.StringIsCustom
 	                                                ,rt.TranslationText
 	                                                ,c.CultureCode

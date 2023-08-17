@@ -12,19 +12,14 @@ public class SettingsCategoryRepository : SqlRepository<SettingsCategoryModel>, 
     private readonly IMapper mapper;
 
     public override string SqlQuery { get; } = @"SELECT DISTINCT 
-	                                                 REPLACE(
-		                                                REPLACE(
-			                                                REPLACE(sc.CategoryName, 'CustomWebPaths', 'PathSettings'), 
-		                                                'Group', ''), 
-	                                                'CinBell.CustomSettings.GeneralSettings', 'altafiberSettings' ) as 'CategoryName'
-	                                                ,REPLACE(CategoryDisplayName, 'Custom Web Paths', 'Path Settings') as 'CategoryDisplayName'
+	                                                 sc.CategoryName
+	                                                ,CategoryDisplayName
 	                                                ,CategoryIsGroup
 	                                                ,cr.ResourceID as 'CategoryResourceID'
-	                                                ,1112 as CategoryParentID
                                                 FROM CMS_SettingsCategory sc
                                                 INNER JOIN CMS_Resource cr
 	                                                ON cr.ResourceName = 'cms.customsystemmodule'
-                                                WHERE CategoryName LIKE 'CinBell%'
+                                                WHERE CategoryName LIKE 'custom%'
                                                 AND CategoryIsGroup = 1";
 
     public SettingsCategoryRepository(
